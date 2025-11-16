@@ -19,8 +19,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1116.65 16.65z" />
         </svg>
       </div>
-
-      <!-- 👤 Profil -->
+    <h1 class="text-[#0088A9] font-semibold hover:text-[#4ED7F1] transition"> Hello, {{ $user->name }}</h1>
       <a href="profil" class="text-[#0088A9] font-semibold hover:text-[#4ED7F1] transition">Profil</a>
     </div>
   </nav>

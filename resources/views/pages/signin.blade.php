@@ -11,11 +11,19 @@
 
   <div class="w-full max-w-md bg-white/80 backdrop-blur-md rounded-2xl shadow-lg p-8 border border-[#4ED7F1]/80">
     <h2 class="text-3xl font-bold text-center text-[#0088A9] mb-6 text-gray-700">Login Account</h2>
-    
+    <form action="/signin" method="POST" class="space-y-4">
+  @csrf
+
+  @if ($errors->any())
+    <div class="bg-red-100 text-red-700 p-3 rounded">
+      {{ $errors->first() }}
+    </div>
+  @endif
     <form action="/signin" method="POST" class="space-y-5">
+      @csrf 
       <div>
-        <label for="email" class="block text-gray-700 font-medium mb-1">Email</label>
-        <input type="email" id="email" name="email" required
+        <label for="name" class="block text-gray-700 font-medium mb-1">Email / Name</label>
+<input type="text" id="name" name="name" value="{{ old('name') }}" required
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4ED7F1] focus:outline-none">
       </div>
 
@@ -24,11 +32,19 @@
         <input type="password" id="password" name="password" required
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4ED7F1] focus:outline-none">
       </div>
+<div class="flex space-x-4 mt-4">
+  <button type="submit"
+    class="w-1/2 bg-[#4ED7F1] hover:bg-[#6FE6FC] text-white font-semibold py-2 rounded-lg transition duration-300">
+    Sign In
+  </button>
 
-      <button type="submit"
-        class="w-full bg-[#4ED7F1] hover:bg-[#6FE6FC] text-white font-semibold py-2 rounded-lg transition duration-300">
-        Sign In
-      </button>
+<a href="{{ route('google.login') }}" 
+  class="w-1/2 flex items-center justify-center bg-white border border-gray-300 hover:bg-gray-100 text-gray-700 font-semibold py-2 rounded-lg transition duration-300 shadow-sm">
+  <img src="{{ asset('googleco.ico') }}" alt="Google Logo" class="w-5 h-5 mr-2">
+  <span>Google</span>
+</a>
+
+</div>
 
       <p class="text-center text-sm text-gray-600">
         Don't have an account?

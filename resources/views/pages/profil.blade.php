@@ -9,6 +9,7 @@
   @include('layouts.icon')
 </head>
 @include('layouts.navbarberanda')
+<br>
 
 <div class="min-h-screen bg-[#F8FEFF] py-20 px-10 mt-10">
   <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-start gap-10">
@@ -20,7 +21,8 @@
         alt="Foto Profil" 
         class="w-28 h-28 rounded-full border-4 border-[#4ED7F1] object-cover"
       >
-      <h2 class="text-2xl font-semibold text-gray-800">Elvin Juniansha</h2>
+      <h2 class="text-2xl font-semibold text-gray-800"><h1>{{ $user->name }}</h1>
+</h2>
     </div>
 
     <!-- DAFTAR CATATAN / PDF -->
