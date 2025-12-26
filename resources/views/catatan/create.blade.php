@@ -55,7 +55,7 @@
             <!-- Isi -->
             <div class="mb-6">
                 <label class="block text-sm font-medium text-gray-600 mb-2">
-                    Isi
+                    Deskripsi
                 </label>
                 <textarea name="isi" rows="5" placeholder="Tulis isi catatan di sini..."
                     class="w-full px-4 py-3 rounded-lg border border-gray-300
