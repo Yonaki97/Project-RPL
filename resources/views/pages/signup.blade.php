@@ -45,7 +45,7 @@
 <div class="flex space-x-4 mt-4">
   <button type="submit"
     class="w-1/2 bg-[#4ED7F1] hover:bg-[#6FE6FC] text-white font-semibold py-2 rounded-lg transition duration-300">
-    Sign In
+    Sign up
   </button>
 
 <a href="{{ route('google.login') }}" 

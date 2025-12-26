@@ -59,7 +59,6 @@ public function signin(Request $request)
     ])->withInput();
 }
 
-
     // Logout
     public function logout(Request $request) {
         Auth::logout();

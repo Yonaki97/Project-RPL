@@ -8,7 +8,9 @@
   <script src="https://cdn.tailwindcss.com"></script>
   @include('layouts.icon')
 </head>
+{{-- sesi include --}}
 @include('layouts.navbarberanda')
+@include('layouts.TombolTambah')
 <br>
 
 <div class="min-h-screen bg-[#F8FEFF] py-20 px-10 mt-10">

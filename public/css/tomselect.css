@@ -1,0 +1,59 @@
+/* === Tom Select Custom Style (Tailwind Friendly) === */
+
+/* Input utama */
+.ts-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid #d1d5db;
+    background-color: #ffffff;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+    display: flex;
+}
+
+/* Hover */
+.ts-control:hover {
+    border-color: #4ED7F1;
+}
+
+/* Focus */
+.ts-control.focus {
+    border-color: #4ED7F1;
+    box-shadow: 0 0 0 2px rgba(78, 215, 241, 0.35);
+}
+
+/* Dropdown */
+.ts-dropdown {
+    border-radius: 0.75rem;
+    margin-top: 0.5rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Option */
+.ts-dropdown .option {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+}
+
+/* Option aktif */
+.ts-dropdown .option.active {
+    background-color: rgba(78, 215, 241, 0.15);
+    color: #0369a1;
+}
+/* Jangan bisa select placeholder */
+.ts-control .item {
+    user-select: none;
+}
+
+/* Placeholder style */
+.ts-control .ts-placeholder {
+    color: #9ca3af;
+    pointer-events: none;
+}
+/* Input search selalu isi penuh */
+.ts-control input {
+    flex: 1 1 auto;
+    min-width: 100%;
+}

@@ -17,6 +17,7 @@ Schema::create('catatans', function (Blueprint $table) {
     $table->foreignId('id_kategori')->constrained('kategoris')->onDelete('cascade');
     $table->string('judul');
     $table->text('isi');
+    $table->string('lampiran')->nullable();
     $table->timestamps();
 });
 
