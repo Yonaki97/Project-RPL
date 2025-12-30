@@ -36,20 +36,14 @@
                     Kategori
                 </label>
 
-                <select id="kategori" name="kategori_id" required>
-                    <option value="">Pilih Kategori</option>
-                    <option value="1">Ilmu Komputer</option>
-                    <option value="2">Hukum</option>
-                    <option value="3">Ekonomi</option>
-                    <option value="4">Matematika</option>
-                    <option value="5">Kedokteran</option>
-                    <option value="6">Psikologi</option>
-                    <option value="7">Teknik Elektro</option>
-                    <option value="8">Teknik Mesin</option>
-                    <option value="9">DKV</option>
-                    <option value="10">Sastra Jepang</option>
-                    <option value="11">Sastra Inggris</option>
-                </select>
+                <select name="id_kategori" id="kategori" required>
+                    @foreach ( $kategoris as $kategori )
+                        <option value="{{ $kategori->id }}"
+                            {{ $SelectedKategori == $kategori->id ? 'selected' : '' }}>
+                            {{ $kategori->jurusan }}
+                        </option>                      
+                    @endforeach
+                    </select>
             </div>
 
             <!-- Isi -->

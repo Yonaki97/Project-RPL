@@ -17,7 +17,7 @@
     {{-- Manggil Main Card --}}
     @include('layouts.card')
     {{-- Memanggil tombol tambah --}}
-    @include('layouts.Tomboltambah')
+    @include('layouts.TombolTambah')
     <!-- 🌙 JS Navbar shrink -->
     <script>
         const navbar = document.getElementById("navbar");

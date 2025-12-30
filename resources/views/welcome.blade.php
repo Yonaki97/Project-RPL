@@ -67,13 +67,23 @@
     <h2 class="text-3xl font-bold text-gray-800 mb-4">
       Catat, Simpan, dan Ubah Ide Jadi Pengetahuan
     </h2>
-    <a href="beranda"> <button class="px-8 py-3 bg-[#FFCA28] 
+
+    @auth
+    <a href="{{route ('beranda') }}"> <button class="px-8 py-3 bg-[#FFCA28] 
     hover:bg-[#f] text-gray-800 font-semibold rounded-xl 
     shadow-md transition">
       Mulai Sekarang
-    </button></a>
+        @endauth
+      @guest
+          <a href="{{ route('signup') }}">
+        <button class="px-8 py-3 bg-[#FFCA28] hover:bg-[#f] text-gray-800 font-semibold rounded-xl shadow-md transition">
+            Mulai Sekarang
+        </button>
+    </a>
+      @endguest  
+    </button>
+  </a>
   </section>
-
   <!-- Footer -->
   <footer class="bg-white border-t border-[#A8F1FF]/50 py-6 text-center text-gray-500">
     © 2025 Noteledge — Semua Hak Dilindungi.

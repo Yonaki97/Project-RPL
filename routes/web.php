@@ -5,17 +5,23 @@
     use App\Http\Controllers\BerandaController;
     use App\Http\Controllers\ProfileController;
     use App\Http\Controllers\CatatanController;
-    
+
 // Google Account
     Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
     Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
-// Tambah Catatan
+Route::middleware(['auth'])->group(function () {
     Route::get('/catatan/tambah', [CatatanController::class, 'create'])
-     ->name('catatan.create');
+        ->name('catatan.create');
+
     Route::post('/catatan', [CatatanController::class, 'store'])
-     ->name('catatan.store');
-    
+        ->name('catatan.store');
+
+    Route::get('/beranda', [BerandaController::class, 'index'])
+        ->name('beranda');
+});
+
+
     // Home 
     Route::get('/', function () {
         return view('welcome');
