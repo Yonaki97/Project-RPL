@@ -35,6 +35,13 @@ class CatatanController extends Controller
         ]);
         return redirect()->route('beranda')
     ->with('success', 'Catatan berhasil disimpan');
+    }
 
+    // menampilkan logic catatan 
+    public function show(Catatan $catatan){
+        // kalau misal pakai privasi, gunakan bawah ini(coming soon)
+        // abort(403, 'Catatan ini bersifat pribadi');
+
+        return view('catatan.previewcatatan', compact('catatan'));
     }
 }

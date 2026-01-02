@@ -18,7 +18,7 @@
     @include('layouts.card')
     {{-- Memanggil tombol tambah --}}
     @include('layouts.TombolTambah')
-    <!-- 🌙 JS Navbar shrink -->
+    <!--  JS Navbar shrink -->
     <script>
         const navbar = document.getElementById("navbar");
         window.addEventListener("scroll", () => {

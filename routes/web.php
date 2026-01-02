@@ -19,8 +19,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/beranda', [BerandaController::class, 'index'])
         ->name('beranda');
-});
 
+    Route::get('/catatan/{catatan}', [CatatanController::class, 'show'])
+        ->name('catatan.show');
+    });
 
     // Home 
     Route::get('/', function () {
@@ -34,7 +36,7 @@ Route::middleware(['auth'])->group(function () {
     });
     // Halaman form
     Route::get('/signin', [AuthController::class, 'showSignin'])->name('signin');
-    Route::get('/signup', [AuthController::class, 'showSignup'])->name('signup');
+    Route::get('/signup', [AuthController::class, 'sshowSignup'])->name('signup');
 
     // Proses form
     Route::post('/signin', [AuthController::class, 'signin']);
@@ -42,10 +44,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/signin', [AuthController::class, 'showSignin'])->name('signin');
 
-    // Preview Catatan
-    Route::get('/preview', function () {
-    return view('catatan.previewcatatan');
-    });
+    // // Preview Catatan
+    // Route::get('/preview', function () {
+    // return view('catatan.previewcatatan');
+    // });
 
     // Route::get('signun', function(){
     //     $data = [

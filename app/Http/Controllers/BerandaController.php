@@ -26,4 +26,5 @@ class BerandaController extends Controller
         $user = Auth::user(); // ambil user yang sedang login
         return view('pages.beranda', compact('user','catatans','kategoris')); // kirim ke Blade
     }
+
 }

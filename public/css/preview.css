@@ -1,0 +1,166 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f9fbfc; /* putih lembut */
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+.container {
+    max-width: 720px; /* lebih nyaman dibaca */
+    margin: 0 auto;
+    padding: 0 12px; /* cegah nabrak di layar kecil */
+}
+
+
+/* CARD */
+.preview-card {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #e6f2f7;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+}
+
+/* HEADER */
+.card-header {
+    padding: 24px 20px;
+    text-align: center;
+    border-bottom: 1px solid #eef4f7;
+}
+
+.card-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 10px;
+}
+
+.badge {
+    display: inline-block;
+    background: #e6f7fb;
+    color: #0ea5c6;
+    padding: 6px 18px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* BODY */
+.card-body {
+    padding: 24px 20px;
+}
+
+/* META */
+.meta-info {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+}
+
+.meta-item {
+    flex: 1 1 48%;
+    min-width: 0;
+}
+
+.info-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #38bdf8;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.info-content {
+    font-size: 15px;
+    color: #334155;
+    background: #f8fafc;
+    padding: 14px 16px;
+    border-radius: 10px;
+}
+
+/* DESKRIPSI */
+.info-section {
+    margin-bottom: 32px;
+}
+
+/* BUTTON */
+.action-buttons {
+    display: flex;
+    gap: 16px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    flex: 1;
+    min-width: 160px;
+    padding: 14px 24px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.25s ease;
+}
+
+/* PRIMARY */
+.btn-primary {
+    background: #4ed7f1;
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #3acdea;
+}
+
+/* SECONDARY */
+.btn-secondary {
+    background: white;
+    color: #0ea5c6;
+    border: 1.5px solid #4ed7f1;
+}
+
+.btn-secondary:hover {
+    background: #e6f7fb;
+}
+
+/* ICON */
+.icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    body {
+        padding: 20px 12px;
+    }
+
+    .card-header h1 {
+        font-size: 22px;
+    }
+
+    .card-body {
+        padding: 24px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}

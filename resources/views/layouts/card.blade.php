@@ -26,7 +26,7 @@
     </p>
 
     <div class="flex justify-between items-center">
-        <a href="#"
+        <a href="{{ route ('catatan.show', $catatan->id) }}"
            class="bg-[#4ED7F1] hover:bg-[#3ACEEA] text-white font-semibold px-5 py-2 rounded-full transition">
             Lihat Catatan
         </a>
