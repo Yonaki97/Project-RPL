@@ -42,6 +42,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/signin', [AuthController::class, 'showSignin'])->name('signin');
 
+    // Preview Catatan
+    Route::get('/preview', function () {
+    return view('catatan.previewcatatan');
+    });
+
     // Route::get('signun', function(){
     //     $data = [
     //         'nama'=> 'AgungRe'
