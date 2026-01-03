@@ -36,7 +36,7 @@ Route::middleware(['auth'])->group(function () {
     });
     // Halaman form
     Route::get('/signin', [AuthController::class, 'showSignin'])->name('signin');
-    Route::get('/signup', [AuthController::class, 'sshowSignup'])->name('signup');
+    Route::get('/signup', [AuthController::class, 'showSignup'])->name('signup');
 
     // Proses form
     Route::post('/signin', [AuthController::class, 'signin']);

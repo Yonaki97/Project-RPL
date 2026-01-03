@@ -37,13 +37,12 @@
                 </label>
 
                 <select name="id_kategori" id="kategori" required>
-                    @foreach ( $kategoris as $kategori )
-                        <option value="{{ $kategori->id }}"
-                            {{ $SelectedKategori == $kategori->id ? 'selected' : '' }}>
+                    @foreach ($kategoris as $kategori)
+                        <option value="{{ $kategori->id }}" {{ $SelectedKategori == $kategori->id ? 'selected' : '' }}>
                             {{ $kategori->jurusan }}
-                        </option>                      
+                        </option>
                     @endforeach
-                    </select>
+                </select>
             </div>
 
             <!-- Isi -->
@@ -59,16 +58,14 @@
 
             {{-- Upload Catatan --}}
             <div class="mb-5">
-    <label class="block text-sm font-medium text-gray-600 mb-2">
-        Lampiran (opsional)
-    </label>
+                <label class="block text-sm font-medium text-gray-600 mb-2">
+                    Lampiran
+                </label>
 
-    <input type="file"
-           name="lampiran"
-           class="w-full px-4 py-2 border border-gray-300 rounded-lg
+                <input type="file" name="lampiran[]" multiple
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg
                   focus:outline-none focus:ring-2 focus:ring-[#4ED7F1]">
-</div>
-
+            </div>
             <!-- Tombol -->
             <button type="submit"
                 class="w-full bg-[#4ED7F1] hover:bg-[#3BC3DD]
