@@ -34,12 +34,15 @@
       <!-- Grid daftar PDF -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         @php
-          // Contoh data dummy PDF
-          $pdfs = [
-            ['judul' => 'Catatan Algoritma', 'file' => 'catatan_algoritma.pdf'],
-            ['judul' => 'Jurnal Fuzzy Logic', 'file' => 'jurnal_fuzzy.pdf'],
-            ['judul' => 'Laporan Akhir', 'file' => 'laporan_akhir.pdf'],
-          ];
+          $pdfs = \App\Models\Catatan::where('id_user', auth()->id())
+              ->get()
+              ->map(function($item) {
+            return [
+                'judul' => $item->judul,
+                'file' => $item->file
+            ];
+        })
+        ->toArray();
         @endphp
 
         @foreach ($pdfs as $pdf)

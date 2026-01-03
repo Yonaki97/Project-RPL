@@ -2,12 +2,12 @@
     <div class="max-w-7xl mx-auto flex items-center justify-between px-4 py-3 md:px-6">
 
         <!-- LEFT: Logo -->
-        <div class="flex items-center gap-2">
-            <img src="{{ asset('NL.png') }}" class="w-10 h-10 md:w-12 md:h-12" />
+        <a href="{{ route('beranda') }}" class="flex items-center gap-2">
+        <img src="{{ asset('NL.png') }}" class="w-10 h-10 md:w-12 md:h-12" />
             <h1 class="hidden sm:block text-xl md:text-2xl font-bold text-[#4ED7F1]">
                 Note<span class="text-[#FFCA28]">ledge</span>
             </h1>
-        </div>
+        </a>
 
         <!--  Search (hidden di mobile) -->
         <div class="hidden md:block w-[40%]">
