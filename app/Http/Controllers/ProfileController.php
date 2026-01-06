@@ -11,7 +11,8 @@ class ProfileController extends Controller
     // 🟢 Menampilkan halaman profil
     public function index()
     {
-        $catatans= Catatan::where('id_user',auth()->id())->get();
+        $catatans= Catatan::with(['user'])
+        ->where('id_user',auth()->id())->get();
         $user = Auth::user();
         return view('pages.profil', compact('user','catatans'));
     }

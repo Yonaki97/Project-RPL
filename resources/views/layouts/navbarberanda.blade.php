@@ -11,9 +11,11 @@
 
         <!--  Search (hidden di mobile) -->
         <div class="hidden md:block w-[40%]">
-            <input type="text" placeholder="Cari catatan..."
+            <form method="GET" action="{{ route('beranda') }}">
+            <input id="searchInput" type="text" placeholder="Cari catatan..." name="search" value="{{ request('search') }}"
                 class="w-full border border-[#4ED7F1]/50 rounded-full px-5 py-2 text-sm
                 focus:ring-2 focus:ring-[#4ED7F1] outline-none">
+            </form>
         </div>
 
         <!--  Desktop -->

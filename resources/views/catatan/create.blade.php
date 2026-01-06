@@ -25,7 +25,7 @@
                 <label class="block text-sm font-medium text-gray-600 mb-2">
                     Judul
                 </label>
-                <input type="text" name="judul" placeholder="Masukkan judul catatan" required
+                <input type="text" name="judul" placeholder="Masukkan judul catatan" value="{{old('judul')}}" required
                     class="w-full px-4 py-3 rounded-lg border border-gray-300
                           focus:outline-none focus:ring-2 focus:ring-[#4ED7F1]
                           focus:border-transparent">
@@ -37,13 +37,12 @@
                 </label>
 
                 <select name="id_kategori" id="kategori" required>
-                    @foreach ( $kategoris as $kategori )
-                        <option value="{{ $kategori->id }}"
-                            {{ $SelectedKategori == $kategori->id ? 'selected' : '' }}>
+                    @foreach ($kategoris as $kategori)
+                        <option value="{{ $kategori->id }}" {{ $SelectedKategori == $kategori->id ? 'selected' : '' }}>
                             {{ $kategori->jurusan }}
-                        </option>                      
+                        </option>
                     @endforeach
-                    </select>
+                </select>
             </div>
 
             <!-- Isi -->
@@ -51,23 +50,25 @@
                 <label class="block text-sm font-medium text-gray-600 mb-2">
                     Deskripsi
                 </label>
-                <textarea name="isi" rows="5" placeholder="Tulis isi catatan di sini..."
+                <textarea name="isi" rows="5" placeholder="Tulis isi catatan di sini..." 
                     class="w-full px-4 py-3 rounded-lg border border-gray-300
                              focus:outline-none focus:ring-2 focus:ring-[#4ED7F1]
-                             focus:border-transparent resize-none"></textarea>
+                             focus:border-transparent resize-none">{{old('isi')}}</textarea>
             </div>
-
             {{-- Upload Catatan --}}
             <div class="mb-5">
-    <label class="block text-sm font-medium text-gray-600 mb-2">
-        Lampiran (opsional)
-    </label>
-
-    <input type="file"
-           name="lampiran"
-           class="w-full px-4 py-2 border border-gray-300 rounded-lg
+                <label class="block text-sm font-medium text-gray-600 mb-2">
+                    Lampiran (opsional)
+                </label>
+                <input type="file" name="lampiran"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg
                   focus:outline-none focus:ring-2 focus:ring-[#4ED7F1]">
-</div>
+                @if ($errors->has('lampiran'))
+                    <p class="text-red-500 text-sm mt-2">
+                        {{ $errors->first('lampiran') }}
+                    </p>
+                @endif
+            </div>
 
             <!-- Tombol -->
             <button type="submit"

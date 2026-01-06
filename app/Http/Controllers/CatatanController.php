@@ -19,6 +19,9 @@ class CatatanController extends Controller
         'id_kategori'=> 'required|exists:kategoris,id',
         'isi'        => 'nullable|string',
         'lampiran'   => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:10240'
+        ],[
+            'lampiran.mimes' => 'Hanya boleh upload file PDF, JPG, JPEG atau PNG',
+            'lampiran.max'  => 'Ukuran file maksimal 10MB'
         ]);
 
         $path=null;
@@ -26,13 +29,14 @@ class CatatanController extends Controller
             $path=$request->file('lampiran')
                           ->store('lampiran_catatan', 'public');
         }
+        if(
         Catatan::create([
             'judul' => $request->judul,
             'id_kategori' => $request->id_kategori,
             'isi' => $request->isi,
             'lampiran' => $path,
             'id_user'   => auth()->id()
-        ]);
+        ]));
         return redirect()->route('beranda')
     ->with('success', 'Catatan berhasil disimpan');
     }
