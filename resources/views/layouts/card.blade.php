@@ -25,17 +25,49 @@
         {{ Str::limit($catatan->isi, 120) }}
     </p>
 
-    <div class="flex justify-between items-center">
-        <a href="{{ route ('catatan.show', $catatan->id) }}"
-           class="bg-[#4ED7F1] hover:bg-[#3ACEEA] text-white font-semibold px-5 py-2 rounded-full transition">
-            Lihat Catatan
-        </a>
+    <div class="flex justify-between items-center mt-4">
 
-        @if($catatan->lampiran)
-            <p class="text-sm text-gray-500">📎 Lampiran</p>
-        @endif
+        <div class="flex items-center gap-6 text-gray-500">
+
+            {{-- Comment --}}
+            <button
+                class="flex items-center gap-1 hover:text-[#4ED7F1] transition">
+                💬
+                <span class="text-sm">Comment</span>
+            </button>
+
+            {{-- Like --}}
+            <button
+                class="flex items-center gap-1 hover:text-red-500 transition">
+                ❤️
+                <span class="text-sm">Like</span>
+            </button>
+
+            {{-- Bookmark --}}
+            <button
+                class="flex items-center gap-1 hover:text-yellow-500 transition">
+                🔖
+                <span class="text-sm">Save</span>
+            </button>
+
+        </div>
+
+        <div class="flex items-center gap-4">
+            @if($catatan->lampiran)
+                <span class="text-sm text-gray-500">📎 Lampiran</span>
+            @endif
+
+            <a href="{{ route('catatan.show', $catatan->id) }}"
+               class="bg-[#4ED7F1] hover:bg-[#3ACEEA]
+                      text-white font-semibold px-5 py-2
+                      rounded-full transition">
+                Lihat Catatan
+            </a>
+        </div>
+
     </div>
 </div>
+
 @empty
 <p class="text-gray-500">Belum ada catatan.</p>
 @endforelse

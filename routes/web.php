@@ -22,8 +22,13 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/catatan/{catatan}', [CatatanController::class, 'show'])
         ->name('catatan.show');
+        
     });
 
+    Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/');
+})->name('logout');
     // Home 
     Route::get('/', function () {
         return view('welcome');
