@@ -16,6 +16,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/catatan', [CatatanController::class, 'store'])
         ->name('catatan.store');
+    // Route::post('/beranda')
 
     Route::get('/beranda', [BerandaController::class, 'index'])
         ->name('beranda');

@@ -14,12 +14,24 @@ class Catatan extends Model
         'id_user'
     ];
     
+    // memberi
     public function kategori()
     {
         return $this->belongsTo(Kategori::class, 'id_kategori');
     }
     public function user(){
         return $this->belongsTo(User::class, 'id_user');
+    }
+
+    // mengambil 
+    public function likes(){
+        return $this->hasMany(Like::class);
+    }
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+    public function bookmarks(){
+        return $this->hasMany(Bookmark::class);
     }
     public function lampirans()
 {

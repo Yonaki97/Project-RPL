@@ -14,6 +14,7 @@ class CatatanController extends Controller
     }
     public function store(Request $request)
     {
+
         $request->validate([
         'judul'      => 'required|string|max:255',
         'id_kategori'=> 'required|exists:kategoris,id',
