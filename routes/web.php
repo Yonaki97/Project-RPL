@@ -10,12 +10,25 @@
     Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
     Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
-Route::middleware(['auth'])->group(function () {
+    Route::middleware(['auth'])->group(function () {
     Route::get('/catatan/tambah', [CatatanController::class, 'create'])
         ->name('catatan.create');
 
     Route::post('/catatan', [CatatanController::class, 'store'])
         ->name('catatan.store');
+
+    Route::get('/catatan/{id}/edit', [CatatanController::class, 'edit'])
+        ->name('catatan.edit');
+    
+    Route::put('/catatan/{id}', [CatatanController::class, 'update'])
+        ->name('catatan.update');
+
+    Route::delete('/catatan/{id}', [CatatanController::class, 'destroy'])
+        ->name('catatan.destroy');
+
+    Route::get('/catatan', [CatatanController::class, 'index'])
+        ->name('catatan.index');
+
     // Route::post('/beranda')
 
     Route::get('/beranda', [BerandaController::class, 'index'])

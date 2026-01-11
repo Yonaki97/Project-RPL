@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kategori extends Model
 {
+    protected $table = 'kategoris'; // Sesuaikan dengan nama tabel di database kamu
+    
     protected $fillable = [
         'jurusan',
     ];

@@ -45,23 +45,46 @@
 
                 <!-- Deskripsi Catatan -->
                 <div class="info-section">
-                    <div class="info-label">Deskripsi Catatan</div>
+                    <div class="info-label">Deskripsi</div>
                     <div class="info-content">
                         {!! nl2br(e($catatan->isi)) !!}
                     </div>
                 </div>
                 <!-- Action Buttons -->
-                <div class="action-buttons">
-                    @if ($catatan->lampiran)
-                        <a href="{{ asset('storage/' . $catatan->lampiran) }}" class="btn btn-primary" download>
-                            Download
-                        </a>
-                    @endif
+                    <div class="flex flex-wrap gap-3 justify-start">
+                        @if ($catatan->lampiran)
+                            <a href="{{ asset('storage/' . $catatan->lampiran) }}" 
+                            class="bg-gradient-to-r from-[#4ED7F1] to-[#00B8D4] text-white px-6 py-2.5 rounded-lg font-semibold hover:shadow-lg transition-all hover:-translate-y-0.5" 
+                            download>
+                                Download
+                            </a>
+                        @endif
 
-                    <a href="{{ route('beranda') }}" class="btn btn-secondary">
-                        Kembali
-                    </a>
-                </div>
+                        {{-- Tombol Edit & Hapus (hanya untuk pemilik) --}}
+                        @if(auth()->check() && auth()->id() == $catatan->id_user)
+                            <a href="{{ route('catatan.edit', $catatan->id) }}" 
+                            class="bg-white border-2 border-[#4ED7F1] text-[#0088A9] px-6 py-2.5 rounded-lg font-semibold hover:bg-[#F0FCFF] hover:shadow-lg transition-all hover:-translate-y-0.5">
+                            Edit
+                            </a>
+                            
+                            <form action="{{ route('catatan.destroy', $catatan->id) }}" 
+                                method="POST" 
+                                class="inline-block" 
+                                onsubmit="return confirm('Apakah kamu yakin ingin menghapus catatan ini?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" 
+                                    class="bg-red-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-red-700 hover:shadow-lg transition-all hover:-translate-y-0.5">
+                                    Hapus
+                                </button>
+                            </form>
+                        @endif
+
+                        <a href="{{ route('beranda') }}" 
+                        class="bg-gray-500 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-gray-600 transition-all hover:-translate-y-0.5">
+                            Kembali
+                        </a>
+                    </div>
                 <!-- COMMENT SECTION -->
 <div class="mt-10 border-t pt-6">
 
