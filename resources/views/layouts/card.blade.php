@@ -32,26 +32,21 @@
 
                     {{-- Comment --}}
                     <button class="flex items-center gap-1 hover:text-[#4ED7F1] transition">
-                        <img src="{{ asset('comment.png') }}"
-                            class="w-6 h-6 transition hover:opacity-50 "
+                        <img src="{{ asset('img/comment.svg') }}" class="w-6 h-6 transition hover:opacity-50 "
                             alt="Comment">
 
                         {{-- <span class="text-sm">Comment</span> --}}
-                    </button>
+                        <button class="likeBtn">
+                            <img src="{{ asset('img/heart.svg') }}" class="heartIcon w-6 h-6 cursor-pointer transititon"
+                                alt="like">
+                        </button>
 
-                    {{-- Like --}}
-                    <button class="flex items-center gap-1 hover:text-red-500 transition">
-                        <img src="{{ asset('heart.png') }}" class="w-5 h-5" alt="heart">
+                        {{-- Bookmark --}}
+                        <button class="flex items-center gap-1 hover:text-yellow-500 transition">
+                            <img src="{{ asset('bookmark.png') }}" class="w-5 h-5" alt="bookmark">
 
-                        {{-- <span class="text-sm">Like</span> --}}
-                    </button>
-
-                    {{-- Bookmark --}}
-                    <button class="flex items-center gap-1 hover:text-yellow-500 transition">
-                        <img src="{{ asset('bookmark.png') }}" class="w-5 h-5" alt="bookmark">
-
-                        {{-- <span class="text-sm">Save</span> --}}
-                    </button>
+                            {{-- <span class="text-sm">Save</span> --}}
+                        </button>
 
                 </div>
 
@@ -68,9 +63,22 @@
 
             </div>
         </div>
-
     @empty
         <p class="text-gray-500">Belum ada catatan.</p>
     @endforelse
-
+    <script>
+        document.querySelectorAll('.likeBtn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const heart = btn.querySelector('.heartIcon');
+                if (heart.dataset.liked === "true") {
+                    // unlike
+                    heart.src = "{{ asset('img/heart.svg') }}";
+                    heart.dataset.liked = "false";
+                } else {
+                    heart.src = "{{ asset('img/heart-fill.svg') }}";
+                    heart.dataset.liked = "true"
+                }
+            });
+        });
+    </script>
 </main>

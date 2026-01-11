@@ -5,6 +5,7 @@
     use App\Http\Controllers\BerandaController;
     use App\Http\Controllers\ProfileController;
     use App\Http\Controllers\CatatanController;
+    use App\Http\Controllers\CommentController;
 
 // Google Account
     Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
@@ -28,6 +29,8 @@
 
     Route::get('/catatan', [CatatanController::class, 'index'])
         ->name('catatan.index');
+    Route::post('/catatan/{catatan_id}/komentar', [CommentController::class, 'store'])
+    ->name('komentar.store');
 
     // Route::post('/beranda')
 

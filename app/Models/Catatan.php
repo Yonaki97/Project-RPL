@@ -28,7 +28,7 @@ class Catatan extends Model
         return $this->hasMany(Like::class);
     }
     public function comments(){
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class,'catatan_id')->latest();
     }
     public function bookmarks(){
         return $this->hasMany(Bookmark::class);

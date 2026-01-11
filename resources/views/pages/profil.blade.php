@@ -48,8 +48,8 @@
                         class="bg-white border border-[#A8F1FF]/50 rounded-lg p-4 shadow hover:shadow-md transition flex flex-col justify-between h-full">
                         <p class="font-medium text-gray-700 mb-2">{{ Str::limit($catatan->judul, 23) }}</p>
                         <div class="flex justify-between items-center">
-                            <a href="{{ asset('storage/' . $catatan->lampiran) }}">
-                                Buka PDF
+                            <a href="{{ route('catatan.show', $catatan->id) }}">
+                                Open Catatan
                             </a>
                             <a href="{{ asset('storage/' . $catatan->lampiran) }}" download
                                 class="text-sm text-gray-500 hover:text-[#4ED7F1] transition">

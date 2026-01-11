@@ -11,8 +11,11 @@
 
 <body class="min-h-screen flex items-center justify-center">
 
-    <div class="bg-white/80 backdrop-blur-md border border-[#4ED7F1]/80 rounded-2xl shadow-xl p-8 w-[380px] ">
-        <h2 class="text-2xl font-bold text-center text-gray-700 mb-6">Create Account</h2>
+    <div class="w-full max-w-md bg-white/80 backdrop-blur-md rounded-2xl shadow-lg p-8 border border-[#4ED7F1]/80">
+        <h2 class="text-3xl font-bold text-center text-gray-700 mb-6">
+            Create Account
+        </h2>
+
         @if ($errors->any())
             <div class="mb-4 p-3 rounded-lg bg-red-100 text-red-700 text-sm">
                 <ul class="list-disc list-inside">
@@ -32,14 +35,14 @@
             @csrf
             <div>
                 <label class="block text-gray-600 text-sm mb-1 font-medium">Full Name</label>
-                <input type="text" name="name" value="{{old('name')}}"
+                <input type="text" name="name" value="{{ old('name') }}"
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4ED7F1] outline-none"
                     required>
             </div>
 
             <div>
                 <label class="block text-gray-600 text-sm mb-1 font-medium">Email</label>
-                <input type="email" name="email" value="{{old('email')}}"
+                <input type="email" name="email" value="{{ old('email') }}"
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4ED7F1] outline-none"
                     required>
             </div>
@@ -61,5 +64,10 @@
                     <span>Google</span>
                 </a>
             </div>
+                            <p class="text-center text-sm text-gray-600">
+                     have an account?
+                    <a href="/signin" class="text-[#4ED7F1] font-medium hover:underline">Sign in</a>
+                            </p>
 </body>
+
 </html>
