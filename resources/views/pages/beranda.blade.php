@@ -13,7 +13,7 @@
 
     @include('layouts.navbarberanda')
     {{-- Manggil Konten Kategori --}}
-    @include('layouts.sidebarmapel')
+    @include('layouts.Beranda.sidebarmapel')
     {{-- Manggil Main Card --}}
     @include('layouts.card')
     {{-- Memanggil tombol tambah --}}

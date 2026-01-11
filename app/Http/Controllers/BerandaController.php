@@ -14,7 +14,8 @@ class BerandaController extends Controller
         $search = $request->search;
 
         // query
-        $query = Catatan::with(['User', 'Kategori']);
+        $query = Catatan::with(['User', 'Kategori'])
+        ->withCount('comments','likes','bookmarks');
 
         // search
         if ($search) {

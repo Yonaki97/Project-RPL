@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 use App\Models\Like;
+use App\Models\Catatan;
 use Illuminate\Http\Request;
 
 class LikeController extends Controller
 {
-    public function toggle($catatan_id)
+    public function toggle(Catatan $catatan)
     {
         $userId = auth()->id();
 

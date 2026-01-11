@@ -30,24 +30,38 @@
 
                 <div class="flex items-center gap-6 text-gray-500">
 
-                    {{-- Comment --}}
-                    <button class="flex items-center gap-1 hover:text-[#4ED7F1] transition">
-                        <img src="{{ asset('img/comment.svg') }}" class="w-6 h-6 transition hover:opacity-50 "
-                            alt="Comment">
+                    <div class="flex items-center gap-1 text-gray-500">
 
+                        <button class="commentBtn hover:text-[#4ED7F1] transition">
+                            <img src="{{ asset('img/comment.svg') }}" class="w-6 h-6">
+                        </button>
+
+                        <span class="text-sm select-none">
+                            {{ $catatan->comments_count }}
+                        </span>
+
+                    </div>
+                    <div class="flex items-center gap-1 text-gray-500">
                         {{-- <span class="text-sm">Comment</span> --}}
                         <button class="likeBtn">
                             <img src="{{ asset('img/heart.svg') }}" class="heartIcon w-6 h-6 cursor-pointer transititon"
                                 alt="like">
                         </button>
-
-                        {{-- Bookmark --}}
-                        <button class="flex items-center gap-1 hover:text-yellow-500 transition">
-                            <img src="{{ asset('bookmark.png') }}" class="w-5 h-5" alt="bookmark">
-
+                        <span class="text-sm select-none">
+                            {{ $catatan->likes_count }}
+                        </span>
+                    </div>
+                    {{-- Bookmark --}}
+                    <div class="flex items-center gap-1 text-gray-500">
+                        <button class="BookmarkBtn">
+                            <img src="{{ asset('img/bookmark.svg') }}"
+                                class="bookmarkIcon w-6 h-6 cursor pointer transition" alt="bookmark">
                             {{-- <span class="text-sm">Save</span> --}}
                         </button>
-
+                        <span class="text-sm select-none">
+                            {{ $catatan->likes_count }}
+                        </span>
+                    </div>
                 </div>
 
                 <div class="flex items-center gap-4">
@@ -66,19 +80,9 @@
     @empty
         <p class="text-gray-500">Belum ada catatan.</p>
     @endforelse
-    <script>
-        document.querySelectorAll('.likeBtn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const heart = btn.querySelector('.heartIcon');
-                if (heart.dataset.liked === "true") {
-                    // unlike
-                    heart.src = "{{ asset('img/heart.svg') }}";
-                    heart.dataset.liked = "false";
-                } else {
-                    heart.src = "{{ asset('img/heart-fill.svg') }}";
-                    heart.dataset.liked = "true"
-                }
-            });
-        });
-    </script>
+
+    {{-- Khusus Javascript, handle tombol feature --}}
+
+    <script src="{{ asset('js/Bookmark.js') }}"></script>
+    <script src="{{ asset('js/Like.js') }}"></script>
 </main>

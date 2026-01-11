@@ -29,8 +29,13 @@
 
     Route::get('/catatan', [CatatanController::class, 'index'])
         ->name('catatan.index');
+
     Route::post('/catatan/{catatan_id}/komentar', [CommentController::class, 'store'])
     ->name('komentar.store');
+
+    Route::post('/catatan/{catatan}/like', [LikeController::class, 'toggle'])
+    ->middleware('auth');
+
 
     // Route::post('/beranda')
 

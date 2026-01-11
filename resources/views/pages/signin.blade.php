@@ -15,7 +15,6 @@
         <h2 class="text-3xl font-bold text-center text-[#0088A9] mb-6 text-gray-700">Login Account</h2>
         <form action="/signin" method="POST" class="space-y-4">
             @csrf
-
             @if ($errors->any())
                 <div class="bg-red-100 text-red-700 p-3 rounded">
                     {{ $errors->first() }}
@@ -54,7 +53,5 @@
                 </p>
             </form>
     </div>
-
 </body>
-
 </html>
