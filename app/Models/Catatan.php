@@ -23,18 +23,25 @@ class Catatan extends Model
         return $this->belongsTo(User::class, 'id_user');
     }
 
-    // mengambil 
-    public function likes(){
-        return $this->hasMany(Like::class);
+
+    //like
+    public function likes()
+    {
+    return $this->hasMany(Like::class, 'catatan_id', 'id');
     }
-    public function comments(){
-        return $this->hasMany(Comment::class,'catatan_id')->latest();
-    }
-    public function bookmarks(){
-        return $this->hasMany(Bookmark::class);
+
+    //bookmark
+    public function bookmarks()
+    {
+    return $this->hasMany(Bookmark::class, 'catatan_id', 'id');
     }
     public function lampirans()
-{
+    {
     return $this->hasMany(Lampiran::class);
-}
+    }
+    // Method helper untuk cek apakah catatan sudah dibookmark oleh user tertentu
+    public function isBookmarkedBy($userId)
+    {
+        return $this->bookmarks()->where('id_user', $userId)->exists();
+    }
 }

@@ -20,6 +20,15 @@
 
         <!--  Desktop -->
         <div class="hidden md:flex items-center gap-6">
+            <!-- Tombol Bookmark - Link ke halaman bookmark -->
+            <a href="{{ route('bookmark.page') }}" 
+            class="flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 hover:bg-[#4ED7F1]/10 {{ Request::is('bookmark') ? 'bg-[#4ED7F1] text-white' : '' }}">
+                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" 
+                    style="fill: {{ Request::is('bookmark') ? '#FFFFFF' : '#6B7280' }}">
+                    <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/>
+                </svg>
+                <span class="font-medium {{ Request::is('bookmark') ? 'text-white' : 'text-gray-600' }}">Bookmark</span>
+            </a>
             <span class="text-[#0088A9] font-semibold">
                 Hello, {{ auth()->user()->name }}
             </span>

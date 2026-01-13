@@ -33,7 +33,20 @@
     Route::post('/catatan/{catatan_id}/komentar', [CommentController::class, 'store'])
     ->name('komentar.store');
 
-    Route::post('/catatan/{catatan}/like', [LikeController::class, 'toggle'])
+
+    // Route untuk toggle bookmark
+    Route::post('/catatan/{id}/bookmark', [CatatanController::class, 'toggleBookmark'])
+    ->name('catatan.bookmark')
+    ->middleware('auth');
+
+    // Route untuk halaman bookmark
+    Route::get('/bookmark', [App\Http\Controllers\CatatanController::class, 'bookmarkPage'])
+    ->name('bookmark.page')
+    ->middleware('auth');
+
+    // Route untuk toggle like
+    Route::post('/catatan/{id}/like', [App\Http\Controllers\CatatanController::class, 'toggleLike'])
+    ->name('catatan.like')
     ->middleware('auth');
 
 

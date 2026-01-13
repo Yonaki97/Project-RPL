@@ -3,7 +3,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Catatan;
 use App\Models\Kategori;
+use App\Models\Bookmark;
+use App\Models\Like;
 use Illuminate\Support\Facades\Storage;
+
 
 class CatatanController extends Controller
 {
@@ -107,4 +110,114 @@ class CatatanController extends Controller
         
         return redirect()->route('beranda')->with('success', 'Catatan berhasil dihapus');;
     }
+
+    // Toggle bookmark (bookmark/unbookmark)
+    public function toggleBookmark($id)
+{
+    try {
+        $catatan = Catatan::findOrFail($id);
+        $userId = auth()->id();
+
+        // Cek bookmark (pakai catatan_id, bukan id_catatan)
+        $bookmark = Bookmark::where('catatan_id', $id)
+                           ->where('id_user', $userId)
+                           ->first();
+
+        if ($bookmark) {
+            // Hapus bookmark
+            $bookmark->delete();
+            return response()->json([
+                'status' => 'removed',
+                'message' => 'Bookmark dihapus',
+                'bookmarked' => false,
+                'count' => $catatan->bookmarks()->count()
+            ]);
+        } else {
+            // Tambah bookmark
+            Bookmark::create([
+                'catatan_id' => $id,  // Pakai catatan_id
+                'id_user' => $userId
+            ]);
+            return response()->json([
+                'status' => 'added',
+                'message' => 'Bookmark ditambahkan',
+                'bookmarked' => true,
+                'count' => $catatan->bookmarks()->count()
+            ]);
+        }
+    } catch (\Exception $e) {
+        \Log::error('Bookmark Error: ' . $e->getMessage());
+        
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+        ], 500);
+    }
+}
+
+
+    public function bookmarkPage()
+    {
+        $userId = auth()->id();
+    
+        // Ambil semua catatan yang sudah di-bookmark oleh user
+        $catatans = Catatan::whereHas('bookmarks', function($query) use ($userId) {
+        $query->where('id_user', $userId);
+        })
+        ->with(['kategori', 'user', 'likes', 'comments', 'bookmarks'])
+        ->withCount(['likes', 'comments'])
+        ->latest()
+        ->get();
+    
+        return view('pages.bookmark', compact('catatans'));
+    }
+
+    //Like
+    public function toggleLike($id)
+    {
+        try {
+            $catatan = Catatan::findOrFail($id);
+            $userId = auth()->id();
+
+            \Log::info('Toggle Like', [
+            'catatan_id' => $id,
+            'user_id' => $userId
+            ]);
+
+        // Cek apakah sudah di-like
+        $like = Like::where('catatan_id', $id)
+                   ->where('id_user', $userId)
+                   ->first();
+
+        if ($like) {
+            // Hapus like
+            $like->delete();
+            return response()->json([
+                'status' => 'removed',
+                'message' => 'Like dihapus',
+                'liked' => false,
+                'count' => $catatan->likes()->count()
+            ]);
+        } else {
+            // Tambah like
+            Like::create([
+                'catatan_id' => $id,
+                'id_user' => $userId
+            ]);
+            return response()->json([
+                'status' => 'added',
+                'message' => 'Like ditambahkan',
+                'liked' => true,
+                'count' => $catatan->likes()->count()
+            ]);
+        }
+            } catch (\Exception $e) {
+            \Log::error('Like Error: ' . $e->getMessage());
+        
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+        ], 500);
+    }
+}
 }

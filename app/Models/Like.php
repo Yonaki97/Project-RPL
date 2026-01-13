@@ -6,18 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Like extends Model
 {
-    protected $fillable = [
-        'catatan_id',
-        'id_user',
-    ];
+    protected $fillable = ['id_user', 'catatan_id'];
 
-    public function Catatan()
+    public function user()
     {
-        return $this->belongsTo(Catatan::class, 'catatan_id');
+        return $this->belongsTo(User::class, 'id_user', 'id');
     }
 
-    public function User()
+    public function catatan()
     {
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->belongsTo(Catatan::class, 'catatan_id', 'id');
     }
 }

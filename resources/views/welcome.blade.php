@@ -44,23 +44,49 @@
       <p class="text-gray-600 mb-8 text-lg font-medium">
         Dengan Noteledge, kamu bisa mengorganisir ide, catatan, dan inspirasi secara efisien dan menyenangkan.
       </p>
-
-      <!-- Search Bar -->
-      <div class="relative w-full md:w-3/4">
-        <input
-          type="text"
-          placeholder="Cari catatan..."
-          class="w-full p-4 pr-12 rounded-2xl border border-[#A8F1FF] bg-white shadow-sm focus:ring-4 focus:ring-[#6FE6FC]/50 focus:border-[#6FE6FC] outline-none transition"
-        />
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-          viewBox="0 0 24 24" stroke-width="1.5" stroke="#6FE6FC"
-          class="absolute right-4 top-1/2 transform -translate-y-1/2 w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M21 21l-4.35-4.35M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16z" />
-        </svg>
-      </div>
     </div>
   </section>
+
+  <!-- Why Section -->
+<section class="py-24 px-6">
+    <div class="text-center max-w-5xl mx-auto mb-16">
+        <h2 class="text-4xl md:text-5xl font-extrabold mb-4">
+            Kenapa mesti menggunakan NOTELEDGE?
+        </h2>
+        <p class="text-300 text-lg">
+            Tempatnya ribuan catatan berkualitas!
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+        
+        <!-- Item 1 -->
+        <div class="text-center flex flex-col items-center">
+            <img src="{{ asset('Book1.png') }}" class="w-28 h-28 mb-6" />
+            <p class="text-300 leading-relaxed">
+                NOTELEDGE menyediakan kumpulan catatan kuliah dari berbagai mahasiswa di seluruh Indonesia. Pengguna bisa menemukan perspektif berbeda, rangkuman yang ringkas, dan materi yang mungkin tidak dijelaskan dosen di kelas.
+            </p>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="text-center flex flex-col items-center">
+            <img src="{{ asset('Book2.png') }}" class="w-28 h-28 mb-6" />
+            <p class="text-300 leading-relaxed">
+                Setiap catatan yang diunggah sudah tersusun rapi dan mudah dibaca. Kamu bisa menghemat waktu belajar karena tidak perlu membuat ulang rangkuman, cukup gunakan catatan orang lain sebagai referensi tambahan.
+            </p>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="text-center flex flex-col items-center">
+            <img src="{{ asset('Book3.png') }}" class="w-28 h-28 mb-6" />
+            <p class="text-300 leading-relaxed">
+                NOTELEDGE bukan hanya tempat menyimpan catatan, tapi juga wadah untuk saling membantu. Dengan mengunggah catatanmu, kamu ikut mendukung mahasiswa lain yang butuh panduan dan referensi belajar.
+            </p>
+        </div>
+
+    </div>
+</section>
+
 
   <!-- Highlight Section -->
   <section class="bg-[#A8F1FF]/30 py-20 px-8 md:px-16 text-center">

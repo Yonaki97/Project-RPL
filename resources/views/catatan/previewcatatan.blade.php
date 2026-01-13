@@ -78,7 +78,7 @@
                         </form>
                     @endif
 
-                    <a href="{{ url()->previous() }}"
+                    <a href="{{ route('beranda') }}"
                         class="bg-gray-500 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-gray-600 transition-all hover:-translate-y-0.5">
                         Kembali
                     </a>
