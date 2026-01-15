@@ -35,29 +35,42 @@ class AuthController extends Controller
         return redirect('/signin')->with('success', 'Account created! Please sign in.');
     }
 
-public function signin(Request $request)
-{
-    $request->validate([
-        'name' => 'required', // bisa email atau username
-        'password' => 'required',
-    ]);
+    public function signin(Request $request)
+    {
+        $request->validate([
+            'name' => 'required', // bisa email atau username
+            'password' => 'required',
+        ]);
 
-    $loginInput = $request->name; // input dari form (bisa email atau nama)
-    $password = $request->password;
+        $loginInput = $request->name; // input dari form (bisa email atau nama)
+        $password = $request->password;
 
-    // cek apakah input berupa email atau nama
-    $fieldType = filter_var($loginInput, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+        // cek apakah input berupa email atau nama
+        $fieldType = filter_var($loginInput, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
 
-    // coba login dengan field yang sesuai
-    if (Auth::attempt([$fieldType => $loginInput, 'password' => $password])) {
-        $request->session()->regenerate();
-        return redirect('/beranda');
+        // coba login dengan field yang sesuai
+        if (Auth::attempt([$fieldType => $loginInput, 'password' => $password])) {
+            
+            // ========================================
+            // CEK APAKAH USER DI-BANNED - TAMBAHAN BARU
+            // ========================================
+            if (Auth::user()->is_banned) {
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                
+                return redirect('/signin')->with('error', 'Akun Anda telah dibanned oleh admin. Silakan hubungi administrator.');
+            }
+            // ========================================
+            
+            $request->session()->regenerate();
+            return redirect('/beranda');
+        }
+
+        return back()->withErrors([
+            'name' => 'Email atau nama pengguna atau password salah.',
+        ])->withInput();
     }
-
-    return back()->withErrors([
-        'name' => 'Email atau nama pengguna atau password salah.',
-    ])->withInput();
-}
 
     // Logout
     public function logout(Request $request) {

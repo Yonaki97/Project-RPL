@@ -6,12 +6,13 @@
     use App\Http\Controllers\ProfileController;
     use App\Http\Controllers\CatatanController;
     use App\Http\Controllers\CommentController;
+    use App\Http\Controllers\AdminController;
 
 // Google Account
     Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
     Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
-    Route::middleware(['auth'])->group(function () {
+    Route::middleware(['auth', 'check.banned'])->group(function () {
     Route::get('/catatan/tambah', [CatatanController::class, 'create'])
         ->name('catatan.create');
 
@@ -63,7 +64,7 @@
     Route::post('/logout', function () {
     Auth::logout();
     return redirect('/');
-})->name('logout');
+    })->name('logout');
     // Home 
     Route::get('/', function () {
         return view('welcome');
@@ -83,6 +84,15 @@
     Route::post('/signup', [AuthController::class, 'signup']);
 
     Route::get('/signin', [AuthController::class, 'showSignin'])->name('signin');
+
+    //admin
+    Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/users', [AdminController::class, 'users'])->name('users');
+    Route::post('/users/{id}/toggle-ban', [AdminController::class, 'toggleBan'])->name('users.toggle-ban');
+    Route::get('/catatans', [AdminController::class, 'catatans'])->name('catatans');
+    Route::delete('/catatans/{id}', [AdminController::class, 'destroyCatatan'])->name('catatans.destroy');
+});
 
     // // Preview Catatan
     // Route::get('/preview', function () {
