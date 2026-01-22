@@ -31,7 +31,7 @@ class GoogleController extends Controller
         } else {
             $user = User::create([
                 'name' => $googleUser->getName(),
-                'email' => $googleUser->getEmail(),
+                'email' => $googleUser->getEmail(), 
                 'google_id' => $googleUser->getId(),
                 'password' => Hash::make(uniqid()),
             ]);
