@@ -31,7 +31,7 @@
                     <div class="flex items-center gap-1 text-gray-500">
 
                         <button class="commentBtn hover:text-[#4ED7F1] transition">
-                            <img src="{{ asset('img/comment.svg') }}" class="w-6 h-6">
+                            <img src="{{ asset('comment.svg') }}" class="w-6 h-6">
                         </button>
 
                         <span class="text-sm select-none">
@@ -66,7 +66,7 @@
                             <button class="bookmark-btn hover:text-[#4ED7F1] transition" 
                                     data-catatan-id="{{ $catatan->id }}"
                                     data-bookmarked="{{ $catatan->isBookmarkedBy(auth()->id()) ? 'true' : 'false' }}">
-                                <img src="{{ asset('img/bookmark.svg') }}" 
+                                <img src="{{ asset('bookmark.svg') }}" 
                                     class="bookmarkIcon w-6 h-6 cursor-pointer transition
                                             {{ $catatan->isBookmarkedBy(auth()->id()) ? 'fill-[#4ED7F1]' : '' }}" 
                                     alt="bookmark">
