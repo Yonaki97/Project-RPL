@@ -93,6 +93,9 @@
     @empty
         <p class="text-gray-500">Belum ada catatan.</p>
     @endforelse
+    <div class="mt-6">
+    {{ $catatans->links() }}
+</div>
 
     {{-- Khusus Javascript, handle tombol feature --}}
 

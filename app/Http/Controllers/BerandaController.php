@@ -31,7 +31,7 @@ class BerandaController extends Controller
             $query->where('id_kategori', $request->kategori);
         }
 
-        $catatans  = $query->latest()->get();
+        $catatans  = $query->latest()->paginate(10)->withQueryString();
         $kategoris = Kategori::all();
         $user      = Auth::user();
 

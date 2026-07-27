@@ -13,6 +13,8 @@ public function up(): void
 {
 Schema::create('catatans', function (Blueprint $table) {
     $table->id();
+    $table->text('hash_dokumen')->nullable();
+    $table->longText('digital_signature')->nullable();
     $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
     $table->foreignId('id_kategori')->constrained('kategoris')->onDelete('cascade');
     $table->string('judul');

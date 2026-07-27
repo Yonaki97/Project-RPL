@@ -6,54 +6,89 @@ use App\Models\Kategori;
 use App\Models\Bookmark;
 use App\Models\Like;
 use Illuminate\Support\Facades\Storage;
+use App\Services\RSASignatureService;
 
 
 class CatatanController extends Controller
 {
+    private $rsa;
+
+public function __construct(RSASignatureService $rsa)
+{
+    $this->rsa = $rsa;
+}
     public function create(Request $request)
     {
         $kategoris = Kategori::all();
         $SelectedKategori = $request->Kategori;
         return view('catatan.create', compact('kategoris','SelectedKategori'));
     }
-    public function store(Request $request)
-    {
+   public function store(Request $request)
+{
+    $request->validate([
+        'judul'       => 'required|string|max:255',
+        'id_kategori' => 'required|exists:kategoris,id',
+        'isi'         => 'nullable|string',
+        'lampiran'    => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:10240'
+    ],[
+        'lampiran.mimes' => 'Hanya boleh upload PDF/JPG/JPEG/PNG',
+        'lampiran.max'   => 'Ukuran maksimal 10MB'
+    ]);
 
-        $request->validate([
-        'judul'      => 'required|string|max:255',
-        'id_kategori'=> 'required|exists:kategoris,id',
-        'isi'        => 'nullable|string',
-        'lampiran'   => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:10240'
-        ],[
-            'lampiran.mimes' => 'Hanya boleh upload file PDF, JPG, JPEG atau PNG',
-            'lampiran.max'  => 'Ukuran file maksimal 10MB'
-        ]);
+    $path = null;
 
-        $path=null;
-        if($request->hasFile('lampiran')){
-            $path=$request->file('lampiran')
-                          ->store('lampiran_catatan', 'public');
-        }
-        if(
-        Catatan::create([
-            'judul' => $request->judul,
-            'id_kategori' => $request->id_kategori,
-            'isi' => $request->isi,
-            'lampiran' => $path,
-            'id_user'   => auth()->id()
-        ]));
-        return redirect()->route('beranda')
-    ->with('success', 'Catatan berhasil disimpan');
+    if($request->hasFile('lampiran')){
+        $path = $request->file('lampiran')
+                        ->store('lampiran_catatan','public');
     }
+
+    $security = $this->rsa->sign(
+        $request->judul,
+        $request->isi,
+        $path,
+    );
+
+    Catatan::create([
+        'judul' => $request->judul,
+        'id_kategori' => $request->id_kategori,
+        'isi' => $request->isi,
+        'lampiran' => $path,
+        'id_user' => auth()->id(),
+
+        'hash_dokumen' => $security['hash'],
+        'digital_signature' => $security['signature']
+    ]);
+
+    return redirect()
+            ->route('beranda')
+            ->with('success','Catatan berhasil disimpan');
+}
 
     // menampilkan logic catatan 
-    public function show(Catatan $catatan){
-        // kalau misal pakai privasi, gunakan bawah ini(coming soon)
-        // abort(403, 'Catatan ini bersifat pribadi');
-
-        return view('catatan.previewcatatan', compact('catatan'));
+   public function show(Catatan $catatan)
+{
+    $valid = $this->rsa->verify(
+        $catatan->judul,
+        $catatan->isi,
+        $catatan->lampiran,
+        $catatan->hash_dokumen,
+        $catatan->digital_signature
+    );
+ if(!$valid){
+        \Log::warning('Digital Signature Invalid',[
+            'catatan_id' => $catatan->id,
+            'judul'      => $catatan->judul,
+            'user_id'    => auth()->id(),
+            'ip'         => request()->ip(),
+            'browser'    => request()->userAgent(),
+            'waktu'      => now(),
+        ]);
     }
-
+    return view(
+        'catatan.previewcatatan',
+        compact('catatan','valid')
+    );
+}
     // Method untuk menampilkan form edit
     public function edit($id)
     {
@@ -66,33 +101,49 @@ class CatatanController extends Controller
     public function update(Request $request, $id)
 {
     $catatan = Catatan::findOrFail($id);
-    
+
     $request->validate([
         'judul' => 'required|string|max:255',
-        'id_kategori' => 'required', // Hapus exists check
+        'id_kategori' => 'required',
         'isi' => 'nullable|string',
         'lampiran' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:10240',
-    ], [
-        'lampiran.mimes' => 'Hanya boleh upload file PDF, JPG, JPEG atau PNG',
-        'lampiran.max' => 'Ukuran file maksimal 10MB'
     ]);
-    
+
     $catatan->judul = $request->judul;
     $catatan->id_kategori = $request->id_kategori;
     $catatan->isi = $request->isi;
-    
+
     if($request->hasFile('lampiran')){
-        if($catatan->lampiran && Storage::disk('public')->exists($catatan->lampiran)){
-            Storage::disk('public')->delete($catatan->lampiran);
+
+        if(
+            $catatan->lampiran &&
+            Storage::disk('public')->exists($catatan->lampiran)
+        ){
+            Storage::disk('public')->delete(
+                $catatan->lampiran
+            );
         }
-        
-        $path = $request->file('lampiran')->store('lampiran_catatan', 'public');
+
+        $path = $request->file('lampiran')
+                        ->store('lampiran_catatan','public');
+
         $catatan->lampiran = $path;
     }
-    
+
+    $security = $this->rsa->sign(
+        $catatan->judul,
+        $catatan->isi,
+        $catatan->lampiran
+    );
+
+    $catatan->hash_dokumen = $security['hash'];
+    $catatan->digital_signature = $security['signature'];
+
     $catatan->save();
-    
-    return redirect()->route('beranda')->with('success', 'Catatan berhasil diupdate');
+
+    return redirect()
+        ->route('beranda')
+        ->with('success','Catatan berhasil diupdate');
 }
 
     // Method untuk hapus catatan

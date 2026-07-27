@@ -12,6 +12,8 @@ class Catatan extends Model
         'isi',
         'lampiran',
         'id_user',
+        'hash_dokumen',
+        'digital_signature'
     ];
 
     // memberi

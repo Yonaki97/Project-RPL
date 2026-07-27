@@ -42,7 +42,24 @@
                         </div>
                     </div>
                 </div>
+                <!-- Informasi Keamanan -->
+                <div class="mt-5 rounded-lg border border-gray-200 bg-gray-50 p-4">
 
+                    <h3 class="font-semibold text-gray-700 mb-3">
+                        🔒 Keamanan Catatan
+                    </h3>
+
+                    @if ($valid == 1)
+                        <div class="text-green-600 font-semibold">
+                            ✅ Catatan Terverifikasi
+                        </div>
+                    @else
+                        <div class="text-red-600 font-semibold">
+                            ❌ Catatan Telah Dimodifikasi
+                        </div>
+                    @endif
+
+                </div>
                 <!-- Deskripsi Catatan -->
                 <div class="info-section">
                     <div class="info-label">Deskripsi</div>
@@ -83,69 +100,63 @@
                         Kembali
                     </a>
                 </div>
-  <!-- COMMENT SECTION -->
-<div class="mt-10 border-t pt-6">
+                <!-- COMMENT SECTION -->
+                <div class="mt-10 border-t pt-6">
 
-    <h3 class="text-lg font-semibold text-[#0088A9] mb-4">
-        💬 Komentar
-    </h3>
+                    <h3 class="text-lg font-semibold text-[#0088A9] mb-4">
+                        💬 Komentar
+                    </h3>
 
-    <!-- LIST KOMENTAR -->
-    <div class="space-y-4 mb-6">
-        @forelse ($catatan->comments as $comment)
-            <div class="bg-[#F8FEFF] border border-[#A8F1FF]/60 rounded-lg p-4">
-                <p class="text-sm font-semibold text-gray-700">
-                    {{ $comment->user->name }}
-                </p>
-                <p class="text-gray-600 text-sm mt-1">
-                    {{ $comment->isi }}
-                </p>
-                <p class="text-xs text-gray-400 mt-1">
-                    {{ $comment->created_at->diffForHumans() }}
-                </p>
-            </div>
-        @empty
-            <p class="text-sm text-gray-500">
-                Belum ada komentar.
-            </p>
-        @endforelse
-    </div>
+                    <!-- LIST KOMENTAR -->
+                    <div class="space-y-4 mb-6">
+                        @forelse ($catatan->comments as $comment)
+                            <div class="bg-[#F8FEFF] border border-[#A8F1FF]/60 rounded-lg p-4">
+                                <p class="text-sm font-semibold text-gray-700">
+                                    {{ $comment->user->name }}
+                                </p>
+                                <p class="text-gray-600 text-sm mt-1">
+                                    {{ $comment->isi }}
+                                </p>
+                                <p class="text-xs text-gray-400 mt-1">
+                                    {{ $comment->created_at->diffForHumans() }}
+                                </p>
+                            </div>
+                        @empty
+                            <p class="text-sm text-gray-500">
+                                Belum ada komentar.
+                            </p>
+                        @endforelse
+                    </div>
 
-    <!-- FORM KOMENTAR -->
-    @auth
-    <form action="{{ route('komentar.store', $catatan->id) }}" 
-          method="POST"
-          class="bg-white border border-[#A8F1FF]/60 rounded-lg p-4">
-        @csrf
+                    <!-- FORM KOMENTAR -->
+                    @auth
+                        <form action="{{ route('komentar.store', $catatan->id) }}" method="POST"
+                            class="bg-white border border-[#A8F1FF]/60 rounded-lg p-4">
+                            @csrf
 
-        <textarea
-            name="isi"
-            rows="3"
-            required
-            placeholder="Tulis komentar..."
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg
+                            <textarea name="isi" rows="3" required placeholder="Tulis komentar..."
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg
                    focus:outline-none focus:ring-2 focus:ring-[#4ED7F1]
                    resize-none text-sm"></textarea>
 
-        <div class="flex justify-end mt-3">
-            <button
-                type="submit"
-                class="bg-[#4ED7F1] hover:bg-[#3ACEEA]
+                            <div class="flex justify-end mt-3">
+                                <button type="submit"
+                                    class="bg-[#4ED7F1] hover:bg-[#3ACEEA]
                        text-white text-sm font-semibold
                        px-5 py-2 rounded-full transition">
-                Kirim
-            </button>
-        </div>
-    </form>
-    @else
-        <p class="text-sm text-gray-500">
-            Login untuk menulis komentar.
-        </p>
-    @endauth
+                                    Kirim
+                                </button>
+                            </div>
+                        </form>
+                    @else
+                        <p class="text-sm text-gray-500">
+                            Login untuk menulis komentar.
+                        </p>
+                    @endauth
 
-</div>
+                </div>
 
-    </div>
+            </div>
 
 </body>
 
